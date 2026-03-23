@@ -205,8 +205,20 @@ export default function DashboardPage() {
       <aside className={`fixed md:relative w-64 h-full bg-black/40 border-r border-white/5 flex flex-col transition-transform duration-500 backdrop-blur-3xl z-50 ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       }`}>
-        <div className="flex md:hidden absolute top-4 right-4">
-          <button onClick={() => setIsSidebarOpen(false)} className="p-2 text-text-muted hover:text-white">
+        <div className="flex md:hidden absolute top-3 right-3 z-50">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsSidebarOpen(false);
+            }}
+            onTouchStart={(e) => {
+              e.stopPropagation();
+              setIsSidebarOpen(false);
+            }}
+            aria-label="Close sidebar"
+            className="p-3 rounded-full bg-black/30 hover:bg-black/50 transition-colors text-text-muted"
+          >
             <X size={20} />
           </button>
         </div>
