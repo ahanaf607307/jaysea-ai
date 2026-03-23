@@ -19,6 +19,7 @@ export default function RegisterPage() {
     setError('');
     try {
       await axiosInstance.post('/user/register', formData);
+      await axiosInstance.post('/otp/send', { email: formData.email });
       router.push(`/otp-verify?email=${encodeURIComponent(formData.email)}`);
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');
