@@ -99,9 +99,12 @@ export default function DashboardPage() {
   };
 
   const fetchMessages = async (id) => {
+    console.log('message id ' , id);
     if (!id) return;
     try {
       const res = await axiosInstance.get(`/messages/${id}`);
+
+      console.log('agent response ' , res.data )
       // Only update if we have actual messages from server 
       // or if we are not in the middle of a local message transition
       if (res.data && (res.data.length > 0 || messages.length === 0)) {
@@ -240,7 +243,7 @@ export default function DashboardPage() {
                 selectedInstance?.id === instance.id ? 'bg-white/[0.06] shadow-sm' : 'hover:bg-white/[0.03]'
               }`}
               onClick={() => {
-                setSelectedInstance(null);
+                setSelectedInstance(instance);
                 setIsSidebarOpen(false);
               }}
             >
