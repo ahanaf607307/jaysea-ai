@@ -246,9 +246,6 @@ export default function DashboardPage() {
                       if (e.key === 'Escape') setEditingInstanceId(null);
                     }}
                   />
-                  <button onClick={() => updateInstance(instance.id)} className="text-primary hover:text-primary-hover">
-                    <Check size={14} />
-                  </button>
                 </div>
               ) : (
                 <>
@@ -281,6 +278,25 @@ export default function DashboardPage() {
             </div>
           ))}
         </div>
+
+        {editingInstanceId && (
+          <div className="absolute bottom-20 left-3 right-3 p-3 bg-black/80 border border-white/10 rounded-xl backdrop-blur-md flex gap-2 z-50">
+            <button
+              type="button"
+              onClick={() => updateInstance(editingInstanceId)}
+              className="flex-1 px-3 py-2 bg-primary text-black rounded-lg text-xs font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={() => setEditingInstanceId(null)}
+              className="flex-1 px-3 py-2 bg-white/10 text-text-muted rounded-lg text-xs hover:bg-white/20 transition-colors"
+            >
+              Cancel
+            </button>
+          </div>
+        )}
 
         <div className="p-5 border-t border-white/5 bg-black/20">
           <div className="flex items-center gap-3">
