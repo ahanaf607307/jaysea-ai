@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Plus, MessageSquare, Trash2, LogOut, User, Send, Edit2, Check, X, ChevronDown, Sparkles, Bot, Menu } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import axiosInstance from '@/api/axios';
@@ -18,6 +18,7 @@ export default function DashboardPage() {
   const [selectedAgentId, setSelectedAgentId] = useState('');
   const [editingInstanceId, setEditingInstanceId] = useState(null);
   const [editName, setEditName] = useState('');
+  const messagesEndRef = useRef(null);
   const [isModelDropdownOpen, setIsModelDropdownOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -42,6 +43,12 @@ export default function DashboardPage() {
       setMessages([]);
     }
   }, [selectedInstance]);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [messages]);
 
   const fetchInstances = async () => {
     try {
@@ -433,6 +440,7 @@ export default function DashboardPage() {
                       </div>
                     </motion.div>
                   )}
+                  <div ref={messagesEndRef} />
                 </div>
               )}
             </AnimatePresence>
